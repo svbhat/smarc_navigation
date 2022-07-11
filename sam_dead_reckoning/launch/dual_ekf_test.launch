@@ -237,6 +237,11 @@
         <remap from="set_pose" to="/initialpose"/>
     </node>
 
+		<!-- node to repub gps covariance -->
+  <node pkg="sam_dead_reckoning" type="gps_covariance_repub.py" name="gps_covariance_repub" >
+        <param name="gps_odom_topic" value="odometry/gps"/>
+         <param name="new_gps_odom_topic" value="odometry/gps_new"/>
+	</node>
 
 	<!-- EKF for fusing GPS and continuous estimate -->
     <!-- name : ekf_loc_global from the dual_ekf_test.yaml file-->
@@ -270,7 +275,8 @@
 
 		<!-- GPS -->
         <!-- <param name="odom0" value="/gps_odom"/> -->
-		<param name="odom0" value="odometry/gps"/>
+		<!--param name="odom0" value="odometry/gps"/-->
+    <param name="odom0" value="odometry/gps_new"/>
 		<rosparam param="odom0_config">[true, true, false,
                                        false, false, false,
                                        false, false, false,
